@@ -1,0 +1,34 @@
+# 打 tag 即发布：用仓库自带的 GITHUB_TOKEN 建 GitHub Release（不引入任何第三方 action）。
+#
+# 说明文件约定：docs/RELEASE-<tag>.md（例如 docs/RELEASE-v1.0.0.md）。
+# 该文件存在就用它作正文，否则退回 GitHub 自动生成的 release notes。
+name: release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Create GitHub Release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -eu
+          tag="$GITHUB_REF_NAME"
+          notes="docs/RELEASE-${tag}.md"
+          if [ -f "$notes" ]; then
+            echo "using notes file: $notes"
+            gh release create "$tag" --title "$tag" --notes-file "$notes"
+          else
+            echo "no notes file for $tag, generating notes"
+            gh release create "$tag" --title "$tag" --generate-notes
+          fi
