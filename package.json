@@ -1,0 +1,43 @@
+{
+  "name": "dsh-wallpaper-claude-compat",
+  "version": "1.0.0",
+  "description": "让 dsh-plugin-wallpaper-engine 的壁纸透出 dsh-claude-style 的实色页面底（限域样式表，任一插件关闭即整体失效）",
+  "type": "module",
+  "main": "host/index.js",
+  "exports": {
+    ".": "./host/index.js",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "host",
+    "cordis.patch.yml",
+    "README.md"
+  ],
+  "keywords": [
+    "dsh",
+    "dsh-plugin",
+    "deepseek-harness",
+    "cordis",
+    "wallpaper-engine",
+    "claude-style",
+    "compat"
+  ],
+  "license": "MIT",
+  "author": "Ra-fangtang",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Ra-fangtang/dsh-wallpaper-claude-compat.git"
+  },
+  "homepage": "https://github.com/Ra-fangtang/dsh-wallpaper-claude-compat#readme",
+  "bugs": {
+    "url": "https://github.com/Ra-fangtang/dsh-wallpaper-claude-compat/issues"
+  },
+  "dsh": {
+    "engines": {
+      "dsh": ">=0.1.7"
+    },
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    }
+  }
+}

@@ -1,0 +1,13 @@
+# dsh-wallpaper-claude-compat bundle patch.
+#
+# 本包只贡献一行宿主插件（没有客户端一半）：它在 index.html 的 <head> 里注入
+# 一张**限域样式表**，把 dsh-claude-style 画在页面外壳上的实色画布让开，好让
+# dsh-plugin-wallpaper-engine 挂在 body 上的壁纸层（.we-layer, z-index:-2）
+# 真的能被看见。
+#
+# 样式表本身只在 body 同时带 data-dsh-claude-style 与 data-we-wallpaper 时命中，
+# 所以两个插件任意一个被禁用/卸载，这一行都只是空转。
+
+- insert:
+    - id: wallpaper-claude-compat
+      name: 'dsh-wallpaper-claude-compat'
